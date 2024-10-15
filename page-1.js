@@ -2,6 +2,8 @@ const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 const imageLoader = document.getElementById('imageLoader');
 const colorPicker = document.getElementById('colorPicker');
+const clearCanvasButton = document.getElementById('clearCanvas');
+    let drawing = false;
 
 let img = new Image();
 let drawing = false;
@@ -51,10 +53,14 @@ function draw(event) {
     const y = event.clientY - rect.top;
 
     context.fillStyle = colorPicker.value;
-    context.fillRect(x, y, 5, 5); // Draw a small square for coloring
+    context.lineWidth = 5;
+    context.lineCap = 'round'
 }
 
 // Change color using color picker
 colorPicker.addEventListener('input', (event) => {
     context.fillStyle = event.target.value;
+
+clearCanvasButton.addEventListener('click', () => {
+        context.clearRect(0, 0, canvas.width, canvas.height);
 });
