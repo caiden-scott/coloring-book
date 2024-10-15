@@ -61,7 +61,7 @@ function draw(event) {
 // Change color using color picker
 colorPicker.addEventListener('input', (event) => {
     context.fillStyle = event.target.value;
-
+}
 clearCanvasButton.addEventListener('click', () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 });
