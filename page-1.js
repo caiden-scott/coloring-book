@@ -48,13 +48,23 @@ canvas.addEventListener('mouseout', () => {
 
 // Draw on the canvas
 function draw(event) {
-    const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    context.fillStyle = colorPicker.value;
     context.lineWidth = 5;
-    context.lineCap = 'round'
+    context.lineCap = 'round';
+    context.strokeStyle = colorPicker.value;
+
+    context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    context.stroke();
+    context.beginPath();
+    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    
+        ctx.lineWidth = 5;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = colorPicker.value;
+
+        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
 }
 
 // Change color using color picker
