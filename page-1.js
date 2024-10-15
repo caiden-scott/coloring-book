@@ -56,15 +56,6 @@ function draw(event) {
     context.stroke();
     context.beginPath();
     context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-    
-        ctx.lineWidth = 5;
-        ctx.lineCap = 'round';
-        ctx.strokeStyle = colorPicker.value;
-
-        ctx.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
 }
 
 // Change color using color picker
