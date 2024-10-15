@@ -3,23 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Digital Coloring Book</title>
+    <title>Interactive Coloring Page</title>
     <style>
-        canvas {
-            border: 1px solid #000;
-            cursor: crosshair;
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
         }
-        #colorPicker, #clearButton {
+        #coloringPage {
+            border: 2px solid black;
+            cursor: crosshair;
+            display: none; /* Initially hidden until an image is uploaded */
+        }
+        button, input {
             margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
         }
     </style>
 </head>
 <body>
-    <h1>Interactive Digital Coloring Book</h1>
+    <h1>Interactive Coloring Page</h1>
     <input type="file" id="imageLoader" accept="image/*">
-    <canvas id="canvas"></canvas>
-    <input type="color" id="colorPicker" value="#ff0000">
-    <button id="clearButton">Clear Drawings</button>
-    <script src="page-1.js"></script>
+    <canvas id="coloringPage" width="600" height="400"></canvas>
+    <button id="clearButton" style="display:none;">Clear Drawings</button>
+
+    <script src="script.js"></script>
 </body>
 </html>
