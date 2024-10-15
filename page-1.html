@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Coloring Book</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+            cursor: crosshair;
+        }
+        #colorPicker {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Digital Coloring Book</h1>
+    <input type="file" id="imageLoader" accept="image/*">
+    <canvas id="canvas"></canvas>
+    <input type="color" id="colorPicker" value="#ff0000">
+    <script src="script.js"></script>
+</body>
+</html>
