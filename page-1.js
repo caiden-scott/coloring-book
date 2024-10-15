@@ -6,7 +6,7 @@ const clearButton = document.getElementById('clearButton');
 
 let img = new Image();
 let drawing = false;
-const brushSize = 20; // Size of the round brush head
+const brushSize = 5; // Size of the round brush head
 
 // Load image from file input
 imageLoader.addEventListener('change', (event) => {
