@@ -3,7 +3,6 @@ const context = canvas.getContext('2d');
 const imageLoader = document.getElementById('imageLoader');
 const colorPicker = document.getElementById('colorPicker');
 const clearCanvasButton = document.getElementById('clearCanvas');
-    let drawing = false;
 
 let img = new Image();
 let drawing = false;
@@ -48,27 +47,19 @@ canvas.addEventListener('mouseout', () => {
 
 // Draw on the canvas
 function draw(event) {
-    const circ = canvas.getBoundingClientRect();
+    const circ = canvas.getBoundingClientCirc();
     const x = event.clientX - circ.left;
     const y = event.clientY - circ.top;
 
     context.fillStyle = colorPicker.value;
-    context.fillCirc(x, y, 5, 5); // Draw a small square for coloring 
-    context.lineWidth = 5;
-    context.lineCap = 'round';
-    context.strokeStyle = colorPicker.value;
-
-    context.lineTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
-    context.stroke();
-    context.beginPath();
-    context.moveTo(event.clientX - canvas.offsetLeft, event.clientY - canvas.offsetTop);
+    context.fillCirc(x, y, 5, 5); // Draw a small circle for coloring 
 }
 
 // Change color using color picker
 colorPicker.addEventListener('input', (event) => {
     context.fillStyle = event.target.value;
 }
-                             
+// Clear Canvas button                             
 clearCanvasButton.addEventListener('click', () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 });
