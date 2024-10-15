@@ -2,10 +2,11 @@ const canvas = document.getElementById('canvas');
 const context = canvas.getContext('2d');
 const imageLoader = document.getElementById('imageLoader');
 const colorPicker = document.getElementById('colorPicker');
-const clearCanvasButton = document.getElementById('clearCanvas');
+const clearButton = document.getElementById('clearButton');
 
 let img = new Image();
 let drawing = false;
+const brushSize = 20; // Size of the round brush head
 
 // Load image from file input
 imageLoader.addEventListener('change', (event) => {
@@ -45,21 +46,25 @@ canvas.addEventListener('mouseout', () => {
     context.beginPath(); // Reset the drawing path
 });
 
-// Draw on the canvas
+// Draw on the canvas with a round brush
 function draw(event) {
-    const circ = canvas.getBoundingClientCirc();
-    const x = event.clientX - circ.left;
-    const y = event.clientY - circ.top;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
 
     context.fillStyle = colorPicker.value;
-    context.fillCirc(x, y, 5, 5); // Draw a small circle for coloring 
+    context.beginPath();
+    context.arc(x, y, brushSize, 0, Math.PI * 2, true); // Draw a circle
+    context.fill();
 }
+
+// Clear the canvas
+clearButton.addEventListener('click', () => {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(img, 0, 0); // Redraw the original image
+});
 
 // Change color using color picker
 colorPicker.addEventListener('input', (event) => {
     context.fillStyle = event.target.value;
-}
-// Clear Canvas button                             
-clearCanvasButton.addEventListener('click', () => {
-        context.clearRect(0, 0, canvas.width, canvas.height);
 });
