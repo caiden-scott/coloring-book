@@ -48,6 +48,12 @@ canvas.addEventListener('mouseout', () => {
 
 // Draw on the canvas
 function draw(event) {
+    const circ = canvas.getBoundingClientRect();
+    const x = event.clientX - circ.left;
+    const y = event.clientY - circ.top;
+
+    context.fillStyle = colorPicker.value;
+    context.fillCirc(x, y, 5, 5); // Draw a small square for coloring 
     context.lineWidth = 5;
     context.lineCap = 'round';
     context.strokeStyle = colorPicker.value;
@@ -62,6 +68,7 @@ function draw(event) {
 colorPicker.addEventListener('input', (event) => {
     context.fillStyle = event.target.value;
 }
+                             
 clearCanvasButton.addEventListener('click', () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
 });
