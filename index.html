@@ -12,13 +12,15 @@
             font-family: Arial, sans-serif;
         }
         #colorPicker {
-            margin: 20px;
-            padding: 10px;
+            margin: 10px;
         }
         #coloringPage {
             border: 2px solid black;
             cursor: crosshair;
             display: none; /* Initially hidden until an image is uploaded */
+        }
+        #controls {
+            margin: 20px 0;
         }
         button, input {
             margin-top: 10px;
@@ -29,11 +31,15 @@
 </head>
 <body>
     <h1>Interactive Coloring Page</h1>
-    <input type="file" id="imageLoader" accept="image/*">
-    <input type="color" id="colorPicker" value="#ff0000">
-    <canvas id="coloringPage" width="600" height="400"></canvas>
-    <button id="clearButton" style="display:none;">Clear Drawings</button>
 
+    <div id="controls">
+        <input type="color" id="colorPicker" value="#ff0000">
+        <input type="file" id="imageLoader" accept="image/*">
+        <button id="clearButton" style="display:none;">Clear Drawings</button>
+    </div>
+
+    <canvas id="coloringPage" width="600" height="400"></canvas>
+   
     <script src="page-1.js"></script>
 </body>
 </html>
