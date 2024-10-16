@@ -1,4 +1,4 @@
-const canvas = document.getElementById('coloringPage');
+const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
 const imageLoader = document.getElementById('imageLoader');
 const clearButton = document.getElementById('clearButton');
