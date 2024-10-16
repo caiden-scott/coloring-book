@@ -1,68 +1,81 @@
-const canvas = document.getElementById('canvas');
+const canvas = document.getElementById('coloringPage');
 const ctx = canvas.getContext('2d');
-const colorPicker = document.getElementById('colorPicker');
 const imageLoader = document.getElementById('imageLoader');
-const clearBtn = document.getElementById('clearBtn');
+const clearButton = document.getElementById('clearButton');
 
+// Variables for drawing
 let painting = false;
-let brushColor = colorPicker.value;
-let brushSize = 10; // Small round brush head
+let brushSize = 10; // Small round brush
+let brushColor = colorPicker.value; // Default brush color
+let backgroundImage = new Image(); // Image object to store the uploaded image
 
-// Load an image onto the canvas
-imageLoader.addEventListener('change', function(e) {
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const img = new Image();
-        img.onload = function() {
-            // Clear the canvas before drawing a new image
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        }
-        img.src = event.target.result;
-    }
-    reader.readAsDataURL(e.target.files[0]);
-});
+// Event listener for image upload
+imageLoader.addEventListener('change', handleImageUpload);
 
-// Set the brush color when the color picker is changed
-colorPicker.addEventListener('input', function() {
-    brushColor = this.value;
-});
-
-// Mouse down event starts painting
-canvas.addEventListener('mousedown', function(e) {
+// Start drawing when mouse is pressed
+canvas.addEventListener('mousedown', (e) => {
     painting = true;
     draw(e);
 });
 
-// Mouse up event stops painting
-canvas.addEventListener('mouseup', function() {
+// Stop drawing when mouse is released or mouse leaves the canvas
+canvas.addEventListener('mouseup', () => {
     painting = false;
-    ctx.beginPath(); // Begin a new path so lines don't connect
+    ctx.beginPath(); // End current drawing path
 });
 
-// Mouse move event paints on the canvas
+canvas.addEventListener('mouseleave', () => {
+    painting = false;
+    ctx.beginPath();
+});
+
+// Draw when mouse is moved
 canvas.addEventListener('mousemove', draw);
 
+// Clear the canvas drawings (keeping the image intact)
+clearButton.addEventListener('click', () => {
+    // Only clear the drawing, not the background image
+    ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+});
+
+// Function to handle the image upload
+function handleImageUpload(e) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        backgroundImage.src = event.target.result;
+
+        backgroundImage.onload = function() {
+            // Set canvas size to match the image
+            canvas.width = backgroundImage.width;
+            canvas.height = backgroundImage.height;
+            
+            // Draw the uploaded image on the canvas
+            ctx.drawImage(backgroundImage, 0, 0);
+
+            // Show the canvas and clear button
+            canvas.style.display = 'block';
+            clearButton.style.display = 'block';
+        };
+    };
+    reader.readAsDataURL(e.target.files[0]);
+}
+
+// Function for drawing on the canvas
 function draw(e) {
     if (!painting) return;
 
-    // Get the mouse position relative to the canvas
+    ctx.lineWidth = brushSize;
+    ctx.lineCap = 'round'; // Round brush head
+    ctx.strokeStyle = brushColor;
+
+    // Get the position of the mouse relative to the canvas
     const rect = canvas.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
 
-    // Set brush style and draw a circle
-    ctx.lineWidth = brushSize;
-    ctx.lineCap = 'round';
-    ctx.strokeStyle = brushColor;
-
+    // Draw on the canvas
     ctx.lineTo(x, y);
     ctx.stroke();
-    ctx.beginPath();
-    ctx.moveTo(x, y);
+    ctx.beginPath(); // Start a new path for the next stroke
+    ctx.moveTo(x, y); // Move to the new mouse position without drawing
 }
-
-// Clear the canvas drawings
-clearBtn.addEventListener('click', function() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-});
