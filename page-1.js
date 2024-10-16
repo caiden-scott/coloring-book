@@ -1,12 +1,13 @@
 const canvas = document.getElementById('coloringPage');
 const ctx = canvas.getContext('2d');
 const imageLoader = document.getElementById('imageLoader');
+const colorPicker = document.getElementByID('colorPicker');
 const clearButton = document.getElementById('clearButton');
 
 // Variables for drawing
 let painting = false;
 let brushSize = 10; // Small round brush
-let brushColor = '#000000'; // Default brush color
+let brushColor = 'color';
 let backgroundImage = new Image(); // Image object to store the uploaded image
 
 // Event listener for image upload
