@@ -6,7 +6,7 @@ const clearButton = document.getElementById('clearButton');
 
 let painting = false;
 let brushColor = colorPicker.value;
-let image = new Image();
+let backgroundImage = new Image();
 
 // Update the brush color when the user selects a new color
 colorPicker.addEventListener('input', function () {
