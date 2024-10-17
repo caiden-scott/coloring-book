@@ -15,20 +15,28 @@ window.onload = function() {
     });
 
     // Load an uploaded image onto the canvas and display the canvas + button
-    imageLoader.addEventListener('change', function (e) {
-        const reader = new FileReader();
-        reader.onload = function (event) {
-            image.src = event.target.result;
-            image.onload = function () {
-                // Clear canvas and draw the image
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-                canvas.style.display = 'block';  // Show the canvas
-                clearButton.style.display = 'inline-block';  // Show the clear button
-            }
-        }
-        reader.readAsDataURL(e.target.files[0]);
-    });
+    imageLoader.addEventListener('change', handleImageUpload);
+
+function handleImageUpload(e) {
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        backgroundImage.src = event.target.result;
+
+        backgroundImage.onload = function() {
+            // Set canvas size to match the image
+            canvas.width = backgroundImage.width;
+            canvas.height = backgroundImage.height;
+            
+            // Draw the uploaded image on the canvas
+            ctx.drawImage(backgroundImage, 0, 0);
+
+            // Show the canvas and clear button
+            canvas.style.display = 'block';
+            clearButton.style.display = 'block';
+        };
+    };
+    reader.readAsDataURL(e.target.files[0]);  
+}
 
     // Start painting when the mouse is pressed
     canvas.addEventListener('mousedown', function(e) {
