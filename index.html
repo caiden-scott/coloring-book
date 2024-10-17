@@ -9,19 +9,19 @@
             text-align: center;
             font-family: Arial, sans-serif;
         }
-
+        
+        #controls {
+            margin: 20px;
+        }
+        
         #colorPicker {
             margin: 10px;
         }
 
         canvas {
-            border: 2px solid black;
+            border: 2px solid #000;
             cursor: crosshair;
             margin-top: 10px;
-        }
-
-        #controls {
-            margin: 20px 0;
         }
 
         button {
@@ -35,14 +35,12 @@
 <body>
     <h1>Image Coloring Page</h1>
 
-    <!-- Color picker and controls -->
     <div id="controls">
         <input type="color" id="colorPicker" value="#ff0000">
         <input type="file" id="imageLoader" accept="image/*">
         <button id="clearButton">Clear Drawings</button>
     </div>
-
-    <!-- Canvas for coloring -->
+    
     <canvas id="canvas" width="600" height="400"></canvas>
 
     <script src="page-1.js"></script>
