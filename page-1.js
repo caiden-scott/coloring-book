@@ -13,6 +13,10 @@ let backgroundImage = new Image(); // Image object to store the uploaded image
 // Event listener for image upload
 imageLoader.addEventListener('change', handleImageUpload);
 
+colorPicker.addEventListener('input', function () {
+            brushColor = this.value;
+        });
+
 // Start drawing when mouse is pressed
 canvas.addEventListener('mousedown', (e) => {
     painting = true;
